@@ -9,5 +9,6 @@ public interface IFactory {
     boolean createSimpleImage(String regionName, Vector2 position);
     boolean createSpriteAnimation(String animationName, Vector2 position);
     boolean createSpineAnimation(String animationName, Vector2 position);
+    boolean createSpriterAnimation(String animationName, Vector2 position);
     boolean createItemFromLibrary(String libraryName, Vector2 position);
 }
