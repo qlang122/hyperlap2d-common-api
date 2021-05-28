@@ -59,7 +59,6 @@ import com.kotcrab.vis.ui.widget.color.internal.VerticalChannelBar;
  * some methods are modified to better fit the needs of real time updating.
  * Also using new ColorPickerListener that has method "changed"
  *
- *
  * @author Kotcrab
  */
 public class CustomColorPicker extends VisWindow implements Disposable {
@@ -69,14 +68,14 @@ public class CustomColorPicker extends VisWindow implements Disposable {
     static final int FIELD_WIDTH = 50;
     static final int HEX_FIELD_WIDTH = 95;
 
-	static final int PALETTE_SIZE = 160;
-	static final int BAR_WIDTH = 130;
-	static final int BAR_HEIGHT = 11;
-	static final float VERTICAL_BAR_WIDTH = 15;
+    static final int PALETTE_SIZE = 160;
+    static final int BAR_WIDTH = 130;
+    static final int BAR_HEIGHT = 11;
+    static final float VERTICAL_BAR_WIDTH = 15;
 
-	private ColorPickerStyle style;
-	private Sizes sizes;
-	private I18NBundle bundle;
+    private ColorPickerStyle style;
+    private Sizes sizes;
+    private I18NBundle bundle;
 
     private ColorPickerListener listener;
 
@@ -109,34 +108,34 @@ public class CustomColorPicker extends VisWindow implements Disposable {
     private Image currentColor;
     private Image newColor;
 
-	private boolean pickerCreated = false;
+    private boolean pickerCreated = false;
 
-	private boolean closeAfterPickingFinished = true;
+    private boolean closeAfterPickingFinished = true;
 
-	public CustomColorPicker () {
-		this((String) null);
-	}
+    public CustomColorPicker() {
+        this((String) null);
+    }
 
-	public CustomColorPicker (String title) {
-		this("default", title, null);
-	}
+    public CustomColorPicker(String title) {
+        this("default", title, null);
+    }
 
-	public CustomColorPicker (String title, ColorPickerListener listener) {
-		this("default", title, listener);
-	}
+    public CustomColorPicker(String title, ColorPickerListener listener) {
+        this("default", title, listener);
+    }
 
-	public CustomColorPicker (ColorPickerListener listener) {
-		this("default", null, listener);
-	}
+    public CustomColorPicker(ColorPickerListener listener) {
+        this("default", null, listener);
+    }
 
-	public CustomColorPicker (String styleName, String title, ColorPickerListener listener) {
-		super(title != null ? title : "");
-		this.listener = listener;
-		this.style = VisUI.getSkin().get(styleName, ColorPickerStyle.class);
-		this.sizes = VisUI.getSizes();
-		this.bundle = Locales.getColorPickerBundle();
+    public CustomColorPicker(String styleName, String title, ColorPickerListener listener) {
+        super(title != null ? title : "");
+        this.listener = listener;
+        this.style = VisUI.getSkin().get(styleName, ColorPickerStyle.class);
+        this.sizes = VisUI.getSizes();
+        this.bundle = Locales.getColorPickerBundle();
 
-		if (title == null) getTitleLabel().setText(getText(TITLE));
+        if (title == null) getTitleLabel().setText(getText(TITLE));
 
         setModal(true);
         setMovable(true);
@@ -148,10 +147,10 @@ public class CustomColorPicker extends VisWindow implements Disposable {
         color = new Color(Color.BLACK);
         tmpColor = new Color(Color.BLACK);
 
-		createColorWidgets();
-		createUI();
-		createListeners();
-		updatePixmaps();
+        createColorWidgets();
+        createUI();
+        createListeners();
+        updatePixmaps();
 
         pack();
         centerWindow();
@@ -159,7 +158,7 @@ public class CustomColorPicker extends VisWindow implements Disposable {
         setStyle(VisUI.getSkin().get("box", WindowStyle.class));
         getTitleLabel().setAlignment(Align.left);
 
-		pickerCreated = true;
+        pickerCreated = true;
     }
 
     @Override
@@ -177,7 +176,7 @@ public class CustomColorPicker extends VisWindow implements Disposable {
     }
 
 
-    private void createUI () {
+    private void createUI() {
         VisTable rightTable = new VisTable(true);
 
         rightTable.add(hBar).row();
@@ -196,129 +195,130 @@ public class CustomColorPicker extends VisWindow implements Disposable {
 
         rightTable.add(aBar).row();
 
-		VisTable leftTable = new VisTable(true);
-		leftTable.add(palette).size(PALETTE_SIZE * sizes.scaleFactor);
-		leftTable.row();
-		leftTable.add(createColorsPreviewTable()).expandX().fillX();
-		leftTable.row();
-		leftTable.add(createHexTable()).expandX().left();
+        VisTable leftTable = new VisTable(true);
+        leftTable.add(palette).size(PALETTE_SIZE * sizes.scaleFactor);
+        leftTable.row();
+        leftTable.add(createColorsPreviewTable()).expandX().fillX();
+        leftTable.row();
+        leftTable.add(createHexTable()).expandX().left();
 
-		add(leftTable).top().padRight(5);
-		add(verticalBar).size(VERTICAL_BAR_WIDTH * sizes.scaleFactor, PALETTE_SIZE * sizes.scaleFactor).top();
-		add(rightTable).expand().left().top().pad(4);
-		row();
-		add(createButtons()).pad(3).right().expandX().colspan(3);
-	}
+        add(leftTable).top().padRight(5);
+        add(verticalBar).size(VERTICAL_BAR_WIDTH * sizes.scaleFactor, PALETTE_SIZE * sizes.scaleFactor).top();
+        add(rightTable).expand().left().top().pad(4);
+        row();
+        add(createButtons()).pad(3).right().expandX().colspan(3);
+    }
 
-	private VisTable createColorsPreviewTable () {
-		VisTable table = new VisTable(false);
-		PickerCommons commons = new PickerCommons(style.pickerStyle, new Sizes(), true);
-		//FIXME getText(OLD)
-		table.add(new VisLabel("Old")).spaceRight(3);
-		table.add(currentColor = new AlphaImage(commons, 0)).height(25 * sizes.scaleFactor).expandX().fillX();
-		table.row();
-		//FIXME getText(NEW)
-		table.add(new VisLabel("New")).spaceRight(3);
-		
-		table.add(newColor = new AlphaImage(commons, 0)).height(25 * sizes.scaleFactor).expandX().fillX();
+    private VisTable createColorsPreviewTable() {
+        VisTable table = new VisTable(false);
+        PickerCommons commons = new PickerCommons(style.pickerStyle, new Sizes(), true);
+        //FIXME getText(OLD)
+        table.add(new VisLabel("Old")).spaceRight(3);
+        table.add(currentColor = new AlphaImage(commons, 0)).height(25 * sizes.scaleFactor).expandX().fillX();
+        table.row();
+        //FIXME getText(NEW)
+        table.add(new VisLabel("New")).spaceRight(3);
 
-		currentColor.setColor(color);
-		newColor.setColor(color);
+        table.add(newColor = new AlphaImage(commons, 0)).height(25 * sizes.scaleFactor).expandX().fillX();
 
-		return table;
-	}
-
-	private VisTable createHexTable () {
-		VisTable table = new VisTable(true);
-		table.add(new VisLabel(getText(HEX)));
-		table.add(hexField = new VisValidatableTextField("00000000")).width(HEX_FIELD_WIDTH * sizes.scaleFactor);
-		table.row();
-
-		hexField.setMaxLength(8);
-		hexField.setProgrammaticChangeEvents(false);
-		hexField.setTextFieldFilter(new TextFieldFilter() {
-			@Override
-			public boolean acceptChar (VisTextField textField, char c) {
-				return Character.isDigit(c) || (c >= 'a' && c <= 'f') || (c >= 'A' && c <= 'F');
-			}
-		});
-
-		hexField.addListener(new ChangeListener() {
-			@Override
-			public void changed (ChangeEvent event, Actor actor) {
-				if (hexField.getText().length() == 8) setColor(Color.valueOf(hexField.getText()), false);
-			}
-		});
+        currentColor.setColor(color);
+        newColor.setColor(color);
 
         return table;
     }
 
-	private VisTable createButtons () {
-		VisTable table = new VisTable(true);
-		table.defaults().right();
-		table.add(restoreButton = new VisTextButton(getText(RESTORE)));
-		table.add(okButton = new VisTextButton(getText(OK)));
-		table.add(cancelButton = new VisTextButton(getText(CANCEL)));
-		return table;
-	}
+    private VisTable createHexTable() {
+        VisTable table = new VisTable(true);
+        table.add(new VisLabel(getText(HEX)));
+        table.add(hexField = new VisValidatableTextField("00000000")).width(HEX_FIELD_WIDTH * sizes.scaleFactor);
+        table.row();
 
-	private void createColorWidgets () {
-		barPixmap = new Pixmap(1, 360, Format.RGB888);
+        hexField.setMaxLength(8);
+        hexField.setProgrammaticChangeEvents(false);
+        hexField.setTextFieldFilter(new TextFieldFilter() {
+            @Override
+            public boolean acceptChar(VisTextField textField, char c) {
+                return Character.isDigit(c) || (c >= 'a' && c <= 'f') || (c >= 'A' && c <= 'F');
+            }
+        });
 
-		for (int h = 0; h < 360; h++) {
-			ColorUtils.HSVtoRGB(360 - h, 100, 100, tmpColor);
-			barPixmap.drawPixel(0, h, Color.rgba8888(tmpColor));
-		}
+        hexField.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                if (hexField.getText().length() == 8)
+                    setColor(Color.valueOf(hexField.getText()), false);
+            }
+        });
 
-		barTexture = new Texture(barPixmap);
-		PickerCommons pickerCommons = new PickerCommons(style.pickerStyle, sizes, true);
-		palette = new Palette(pickerCommons, 100, new ChangeListener() {
-			@Override
-			public void changed (ChangeEvent event, Actor actor) {
-				sBar.setValue(palette.getS());
-				vBar.setValue(palette.getV());
+        return table;
+    }
+
+    private VisTable createButtons() {
+        VisTable table = new VisTable(true);
+        table.defaults().right();
+        table.add(restoreButton = new VisTextButton(getText(RESTORE)));
+        table.add(okButton = new VisTextButton(getText(OK)));
+        table.add(cancelButton = new VisTextButton(getText(CANCEL)));
+        return table;
+    }
+
+    private void createColorWidgets() {
+        barPixmap = new Pixmap(1, 360, Format.RGB888);
+
+        for (int h = 0; h < 360; h++) {
+            ColorUtils.HSVtoRGB(360 - h, 100, 100, tmpColor);
+            barPixmap.drawPixel(0, h, Color.rgba8888(tmpColor));
+        }
+
+        barTexture = new Texture(barPixmap);
+        PickerCommons pickerCommons = new PickerCommons(style.pickerStyle, sizes, true);
+        palette = new Palette(pickerCommons, 100, new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                sBar.setValue(palette.getS());
+                vBar.setValue(palette.getV());
 
                 updateHSVValuesFromFields();
                 updatePixmaps();
             }
         });
 
-		verticalBar = new VerticalChannelBar(pickerCommons, 360, new ChangeListener() {
-			@Override
-			public void changed (ChangeEvent event, Actor actor) {
-				hBar.setValue(verticalBar.getValue());
-				updateHSVValuesFromFields();
-				updatePixmaps();
-			}
-		});
+        verticalBar = new VerticalChannelBar(pickerCommons, 360, new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                hBar.setValue(verticalBar.getValue());
+                updateHSVValuesFromFields();
+                updatePixmaps();
+            }
+        });
 
-		hBar = new ColorChannelWidget(style, sizes, "H", 360, new ColorChannelWidget.ColorChannelWidgetListener() {
-			@Override
-			public void updateFields () {
-				verticalBar.setValue(hBar.getValue());
-				updateHSVValuesFromFields();
-				updatePixmaps();
-			}
-
-			@Override
-			public void draw (Pixmap pixmap) {
-				for (int h = 0; h < 360; h++) {
-					ColorUtils.HSVtoRGB(h, sBar.getValue(), vBar.getValue(), tmpColor);
-					pixmap.drawPixel(h, 0, Color.rgba8888(tmpColor));
-				}
-			}
-		});
-
-		sBar = new ColorChannelWidget(style, sizes, "S", 100, new ColorChannelWidget.ColorChannelWidgetListener() {
-			@Override
-			public void updateFields () {
-				palette.setValue(sBar.getValue(), vBar.getValue());
-				updateHSVValuesFromFields();
-				updatePixmaps();
-			}
+        hBar = new ColorChannelWidget(style, sizes, "H", 360, new ColorChannelWidget.ColorChannelWidgetListener() {
+            @Override
+            public void updateFields() {
+                verticalBar.setValue(hBar.getValue());
+                updateHSVValuesFromFields();
+                updatePixmaps();
+            }
 
             @Override
-            public void draw (Pixmap pixmap) {
+            public void draw(Pixmap pixmap) {
+                for (int h = 0; h < 360; h++) {
+                    ColorUtils.HSVtoRGB(h, sBar.getValue(), vBar.getValue(), tmpColor);
+                    pixmap.drawPixel(h, 0, Color.rgba8888(tmpColor));
+                }
+            }
+        });
+
+        sBar = new ColorChannelWidget(style, sizes, "S", 100, new ColorChannelWidget.ColorChannelWidgetListener() {
+            @Override
+            public void updateFields() {
+                palette.setValue(sBar.getValue(), vBar.getValue());
+                updateHSVValuesFromFields();
+                updatePixmaps();
+            }
+
+            @Override
+            public void draw(Pixmap pixmap) {
                 for (int s = 0; s < 100; s++) {
                     ColorUtils.HSVtoRGB(hBar.getValue(), s, vBar.getValue(), tmpColor);
                     pixmap.drawPixel(s, 0, Color.rgba8888(tmpColor));
@@ -326,33 +326,33 @@ public class CustomColorPicker extends VisWindow implements Disposable {
             }
         });
 
-		vBar = new ColorChannelWidget(style, sizes, "V", 100, new ColorChannelWidget.ColorChannelWidgetListener() {
-			@Override
-			public void updateFields () {
-				palette.setValue(sBar.getValue(), vBar.getValue());
-				updateHSVValuesFromFields();
-				updatePixmaps();
-			}
-
-			@Override
-			public void draw (Pixmap pixmap) {
-				for (int v = 0; v < 100; v++) {
-					ColorUtils.HSVtoRGB(hBar.getValue(), sBar.getValue(), v, tmpColor);
-					pixmap.drawPixel(v, 0, Color.rgba8888(tmpColor));
-				}
-
-			}
-		});
-
-		rBar = new ColorChannelWidget(style, sizes, "R", 255, new ColorChannelWidget.ColorChannelWidgetListener() {
-			@Override
-			public void updateFields () {
-				updateRGBValuesFromFields();
-				updatePixmaps();
-			}
+        vBar = new ColorChannelWidget(style, sizes, "V", 100, new ColorChannelWidget.ColorChannelWidgetListener() {
+            @Override
+            public void updateFields() {
+                palette.setValue(sBar.getValue(), vBar.getValue());
+                updateHSVValuesFromFields();
+                updatePixmaps();
+            }
 
             @Override
-            public void draw (Pixmap pixmap) {
+            public void draw(Pixmap pixmap) {
+                for (int v = 0; v < 100; v++) {
+                    ColorUtils.HSVtoRGB(hBar.getValue(), sBar.getValue(), v, tmpColor);
+                    pixmap.drawPixel(v, 0, Color.rgba8888(tmpColor));
+                }
+
+            }
+        });
+
+        rBar = new ColorChannelWidget(style, sizes, "R", 255, new ColorChannelWidget.ColorChannelWidgetListener() {
+            @Override
+            public void updateFields() {
+                updateRGBValuesFromFields();
+                updatePixmaps();
+            }
+
+            @Override
+            public void draw(Pixmap pixmap) {
                 for (int r = 0; r < 255; r++) {
                     tmpColor.set(r / 255.0f, color.g, color.b, 1);
                     pixmap.drawPixel(r, 0, Color.rgba8888(tmpColor));
@@ -360,15 +360,15 @@ public class CustomColorPicker extends VisWindow implements Disposable {
             }
         });
 
-		gBar = new ColorChannelWidget(style, sizes, "G", 255, new ColorChannelWidget.ColorChannelWidgetListener() {
-			@Override
-			public void updateFields () {
-				updateRGBValuesFromFields();
-				updatePixmaps();
-			}
+        gBar = new ColorChannelWidget(style, sizes, "G", 255, new ColorChannelWidget.ColorChannelWidgetListener() {
+            @Override
+            public void updateFields() {
+                updateRGBValuesFromFields();
+                updatePixmaps();
+            }
 
             @Override
-            public void draw (Pixmap pixmap) {
+            public void draw(Pixmap pixmap) {
                 for (int g = 0; g < 255; g++) {
                     tmpColor.set(color.r, g / 255.0f, color.b, 1);
                     pixmap.drawPixel(g, 0, Color.rgba8888(tmpColor));
@@ -376,15 +376,15 @@ public class CustomColorPicker extends VisWindow implements Disposable {
             }
         });
 
-		bBar = new ColorChannelWidget(style, sizes, "B", 255, new ColorChannelWidget.ColorChannelWidgetListener() {
-			@Override
-			public void updateFields () {
-				updateRGBValuesFromFields();
-				updatePixmaps();
-			}
+        bBar = new ColorChannelWidget(style, sizes, "B", 255, new ColorChannelWidget.ColorChannelWidgetListener() {
+            @Override
+            public void updateFields() {
+                updateRGBValuesFromFields();
+                updatePixmaps();
+            }
 
             @Override
-            public void draw (Pixmap pixmap) {
+            public void draw(Pixmap pixmap) {
                 for (int b = 0; b < 255; b++) {
                     tmpColor.set(color.r, color.g, b / 255.0f, 1);
                     pixmap.drawPixel(b, 0, Color.rgba8888(tmpColor));
@@ -393,15 +393,15 @@ public class CustomColorPicker extends VisWindow implements Disposable {
             }
         });
 
-		aBar = new ColorChannelWidget(style, sizes, "A", 255, true, new ColorChannelWidget.ColorChannelWidgetListener() {
-			@Override
-			public void updateFields () {
-				if (aBar.isInputValid()) color.a = aBar.getValue() / 255.0f;
-				updatePixmaps();
-			}
+        aBar = new ColorChannelWidget(style, sizes, "A", 255, true, new ColorChannelWidget.ColorChannelWidgetListener() {
+            @Override
+            public void updateFields() {
+                if (aBar.isInputValid()) color.a = aBar.getValue() / 255.0f;
+                updatePixmaps();
+            }
 
             @Override
-            public void draw (Pixmap pixmap) {
+            public void draw(Pixmap pixmap) {
                 pixmap.fill();
                 for (int i = 0; i < 255; i++) {
                     tmpColor.set(color.r, color.g, color.b, i / 255.0f);
@@ -411,7 +411,7 @@ public class CustomColorPicker extends VisWindow implements Disposable {
         });
     }
 
-    private void createListeners () {
+    private void createListeners() {
         restoreButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -419,7 +419,7 @@ public class CustomColorPicker extends VisWindow implements Disposable {
             }
         });
 
-		okButton.addListener(new ChangeListener() {
+        okButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 if (listener != null) listener.finished(new Color(color));
@@ -438,23 +438,23 @@ public class CustomColorPicker extends VisWindow implements Disposable {
     }
 
     @Override
-    protected void close () {
+    protected void close() {
         if (listener != null) listener.canceled();
         super.close();
     }
 
-    public ColorPickerListener getListener () {
+    public ColorPickerListener getListener() {
         return listener;
     }
 
-    public void setListener (ColorPickerListener listener) {
+    public void setListener(ColorPickerListener listener) {
         this.listener = listener;
     }
 
-	private void updatePixmaps () {
-		palette.setPickerHue(hBar.getValue());
+    private void updatePixmaps() {
+        palette.setPickerHue(hBar.getValue());
         newColor.setColor(color);
-        
+
         hBar.redraw();
         sBar.redraw();
         vBar.redraw();
@@ -467,42 +467,45 @@ public class CustomColorPicker extends VisWindow implements Disposable {
 
         hexField.setText(color.toString().toUpperCase());
         hexField.setCursorPosition(hexField.getMaxLength());
-		
-		if (listener != null && pickerCreated) listener.changed(new Color(color));
+
+        if (listener != null && pickerCreated) listener.changed(new Color(color));
     }
-	@Override
-	/** Sets current selected color in picker.*/
-	public void setColor (Color c) {
-		//this method overrides setColor in Actor, not big deal we definitely don't need it
-		setColor(c, true);
-	}
-
-	private void setColor (Color c, boolean updateCurrentColor) {
-		if (updateCurrentColor) {
-			currentColor.setColor(new Color(c));
-			oldColor = new Color(c);
-		}
-		color = new Color(c);
-		updateFieldsFromColor();
-		updatePixmaps();
-	}
-
-	private String getText (ColorPickerText text) {
-		return bundle.get(text.getName());
-	}
-
-	/**
-	 * Controls whether to fade out color picker after users finished color picking and has pressed OK button. If
-	 * this is set to false picker won't close after pressing OK button. Default is true.
-	 * Note that  by default picker is a modal window so might also want to call {@code colorPicker.setModal(false)} to
-	 * disable it.
-	 */
-	public void setCloseAfterPickingFinished (boolean closeAfterPickingFinished) {
-		this.closeAfterPickingFinished = closeAfterPickingFinished;
-	}
 
     @Override
-    public void dispose () {
+    /** Sets current selected color in picker.*/
+    public void setColor(Color c) {
+        //this method overrides setColor in Actor, not big deal we definitely don't need it
+        setColor(c, true);
+    }
+
+    private void setColor(Color c, boolean updateCurrentColor) {
+        if (updateCurrentColor) {
+            currentColor.setColor(new Color(c));
+            oldColor = new Color(c);
+        }
+        color = new Color(c);
+        updateFieldsFromColor();
+        updatePixmaps();
+    }
+
+    private String getText(ColorPickerText text) {
+        return bundle.get(text.getName());
+    }
+
+    /**
+     * Controls whether to fade out color picker after users finished color picking and has pressed OK button. If
+     * this is set to false picker won't close after pressing OK button. Default is true.
+     * Note that  by default picker is a modal window so might also want to call {@code colorPicker.setModal(false)} to
+     * disable it.
+     *
+     * @param closeAfterPickingFinished
+     */
+    public void setCloseAfterPickingFinished(boolean closeAfterPickingFinished) {
+        this.closeAfterPickingFinished = closeAfterPickingFinished;
+    }
+
+    @Override
+    public void dispose() {
         barTexture.dispose();
         barPixmap.dispose();
 
@@ -517,7 +520,7 @@ public class CustomColorPicker extends VisWindow implements Disposable {
         aBar.dispose();
     }
 
-    private void updateFieldsFromColor () {
+    private void updateFieldsFromColor() {
         int[] hsv = ColorUtils.RGBtoHSV(color);
         int ch = hsv[0];
         int cs = hsv[1];
@@ -542,7 +545,7 @@ public class CustomColorPicker extends VisWindow implements Disposable {
         palette.setValue(sBar.getValue(), vBar.getValue());
     }
 
-    private void updateHSVValuesFromFields () {
+    private void updateHSVValuesFromFields() {
         int[] hsv = ColorUtils.RGBtoHSV(color);
         int h = hsv[0];
         int s = hsv[1];
@@ -563,7 +566,7 @@ public class CustomColorPicker extends VisWindow implements Disposable {
         bBar.setValue(cb);
     }
 
-    private void updateRGBValuesFromFields () {
+    private void updateRGBValuesFromFields() {
         int r = MathUtils.round(color.r * 255.0f);
         int g = MathUtils.round(color.g * 255.0f);
         int b = MathUtils.round(color.b * 255.0f);

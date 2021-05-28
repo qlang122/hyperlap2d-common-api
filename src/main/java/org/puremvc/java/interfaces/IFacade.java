@@ -63,7 +63,7 @@ public interface IFacade extends INotifier {
      * <P>Register an <code>ICommand</code> with the <code>Controller</code>.</P>
      *
      * @param notificationName the name of the <code>INotification</code> to associate the <code>ICommand</code> with.
-     * @param commandSupplier a reference to the Command Supplier Function of the <code>ICommand</code>.
+     * @param commandSupplier  a reference to the Command Supplier Function of the <code>ICommand</code>.
      */
     void registerCommand(String notificationName, Supplier<ICommand> commandSupplier);
 

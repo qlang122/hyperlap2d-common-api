@@ -34,7 +34,7 @@ public interface IView {
      * of <code>INotifications</code> with a given name.</P>
      *
      * @param notificationName the name of the <code>INotifications</code> to notify this <code>IObserver</code> of
-     * @param observer the <code>IObserver</code> to register
+     * @param observer         the <code>IObserver</code> to register
      */
     void registerObserver(String notificationName, IObserver observer);
 
@@ -42,7 +42,7 @@ public interface IView {
      * <P>Remove a group of observers from the observer list for a given Notification name.</P>
      *
      * @param notificationName which observer list to remove from
-     * @param notifyContext removed the observers with this object as their notifyContext
+     * @param notifyContext    removed the observers with this object as their notifyContext
      */
     void removeObserver(String notificationName, Object notifyContext);
 

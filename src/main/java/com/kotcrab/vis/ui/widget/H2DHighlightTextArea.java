@@ -15,6 +15,7 @@ import com.kotcrab.vis.ui.VisUI;
 import com.kotcrab.vis.ui.util.highlight.BaseHighlighter;
 import com.kotcrab.vis.ui.util.highlight.Highlight;
 import com.kotcrab.vis.ui.util.highlight.Highlighter;
+
 import games.rednblack.h2d.common.util.H2DHighlight;
 
 /**
@@ -25,6 +26,7 @@ import games.rednblack.h2d.common.util.H2DHighlight;
  * Note about overlapping highlights: this text area can handle overlapping highlights, highlights that starts earlier
  * have higher priority. If two highlights have the exactly the same start point, then it is undefined which highlight
  * will be used and depends on how array containing highlights will be sorted.
+ *
  * @author Kotcrab
  * @author fgnm
  * @see Highlighter
@@ -70,7 +72,7 @@ public class H2DHighlightTextArea extends HighlightTextArea {
     }
 
     @Override
-    void updateDisplayText () {
+    void updateDisplayText() {
         super.updateDisplayText();
         processHighlighter();
     }
@@ -94,7 +96,7 @@ public class H2DHighlightTextArea extends HighlightTextArea {
             }
 
             @Override
-            protected void setCursorPosition (float x, float y) {
+            protected void setCursorPosition(float x, float y) {
                 moveOffset = -1;
 
                 Drawable background = style.background;
@@ -131,9 +133,9 @@ public class H2DHighlightTextArea extends HighlightTextArea {
     /**
      * Intercept keyDown event for custom actions
      *
-     * @param event
-     * @param keycode
-     * @return
+     * @param event   event
+     * @param keycode keycode
+     * @return use
      */
     protected boolean onKeyDown(InputEvent event, int keycode) {
         return false;
@@ -142,9 +144,9 @@ public class H2DHighlightTextArea extends HighlightTextArea {
     /**
      * Intercept keyTyped event for custom actions
      *
-     * @param event
-     * @param character
-     * @return
+     * @param event     event
+     * @param character character
+     * @return use
      */
     protected boolean onKeyTyped(InputEvent event, char character) {
         return false;
@@ -153,16 +155,16 @@ public class H2DHighlightTextArea extends HighlightTextArea {
     /**
      * Intercept keyUp event for custom actions
      *
-     * @param event
-     * @param keycode
-     * @return
+     * @param event   event
+     * @param keycode keycode
+     * @return use
      */
     protected boolean onKeyUp(InputEvent event, int keycode) {
         return false;
     }
 
     @Override
-    protected void calculateOffsets () {
+    protected void calculateOffsets() {
         super.calculateOffsets();
         if (!chunkUpdateScheduled) return;
         chunkUpdateScheduled = false;
@@ -289,7 +291,7 @@ public class H2DHighlightTextArea extends HighlightTextArea {
     }
 
     @Override
-    protected void drawCursor (Drawable cursorPatch, Batch batch, BitmapFont font, float x, float y) {
+    protected void drawCursor(Drawable cursorPatch, Batch batch, BitmapFont font, float x, float y) {
         float textOffset = cursor >= glyphPositions.size || cursorLine * 2 >= linesBreak.size ? 0
                 : glyphPositions.get(cursor) - glyphPositions.get(linesBreak.items[cursorLine * 2]);
         cursorX = textOffset + fontOffset + font.getData().cursorX;
@@ -299,7 +301,7 @@ public class H2DHighlightTextArea extends HighlightTextArea {
     }
 
     @Override
-    protected void drawText (Batch batch, BitmapFont font, float x, float y) {
+    protected void drawText(Batch batch, BitmapFont font, float x, float y) {
         maxAreaHeight = 0;
         float offsetY = font.getDescent();
         float parentAlpha = font.getColor().a;
@@ -364,7 +366,7 @@ public class H2DHighlightTextArea extends HighlightTextArea {
      * Processes highlighter rules, collects created highlights and schedules text area displayed text update. This should be called
      * after highlighter rules has changed to update highlights.
      */
-    public void processHighlighter () {
+    public void processHighlighter() {
         if (highlights == null) return;
         highlights.clear();
         if (highlighter != null) highlighter.process(this, highlights);
@@ -375,22 +377,22 @@ public class H2DHighlightTextArea extends HighlightTextArea {
      * Changes highlighter of text area. Note that you don't have to call {@link #processHighlighter()} after changing
      * highlighter - you only have to call it when highlighter rules has changed.
      */
-    public void setHighlighter (BaseHighlighter highlighter) {
+    public void setHighlighter(BaseHighlighter highlighter) {
         this.highlighter = highlighter;
         processHighlighter();
     }
 
-    public BaseHighlighter getHighlighter () {
+    public BaseHighlighter getHighlighter() {
         return highlighter;
     }
 
     @Override
-    public float getPrefWidth () {
+    public float getPrefWidth() {
         return maxAreaWidth + 5;
     }
 
     @Override
-    public float getPrefHeight () {
+    public float getPrefHeight() {
         return maxAreaHeight + 5;
     }
 
@@ -410,7 +412,7 @@ public class H2DHighlightTextArea extends HighlightTextArea {
         int lineIndex;
         H2DHighlight.TextFormat textFormat;
 
-        public Chunk (String text, Color color, Color backgroundColor, float offsetX, int lineIndex, H2DHighlight.TextFormat textFormat) {
+        public Chunk(String text, Color color, Color backgroundColor, float offsetX, int lineIndex, H2DHighlight.TextFormat textFormat) {
             this.text = text;
             this.color = color;
             this.offsetX = offsetX;

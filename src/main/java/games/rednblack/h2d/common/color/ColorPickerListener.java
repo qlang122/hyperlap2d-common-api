@@ -24,11 +24,17 @@ import com.badlogic.gdx.graphics.Color;
  * Created by azakhary on 7/14/2015.
  */
 public interface ColorPickerListener {
-    /** Called when color selection was canceled by user (either by clicking cancel or closing the window) */
-    public void canceled ();
+    /**
+     * Called when color selection was canceled by user (either by clicking cancel or closing the window)
+     */
+    void canceled();
 
-    /** Called when user finises selecting new color */
-    public void finished (Color newColor);
+    /**
+     * Called when user finises selecting new color
+     *
+     * @param newColor
+     */
+    void finished(Color newColor);
 
-    public void changed (Color newColor);
+    void changed(Color newColor);
 }

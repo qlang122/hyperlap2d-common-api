@@ -11,73 +11,89 @@ public abstract class ImageTab implements Disposable {
     private boolean savable = false;
     private boolean dirty = false;
 
-    public ImageTab () {
-    }
-
-    /** @param savable if true tab can be saved and marked as dirty. */
-    public ImageTab (boolean savable) {
-        this.savable = savable;
+    public ImageTab() {
     }
 
     /**
      * @param savable if true tab can be saved and marked as dirty.
+     */
+    public ImageTab(boolean savable) {
+        this.savable = savable;
+    }
+
+    /**
+     * @param savable         if true tab can be saved and marked as dirty.
      * @param closeableByUser if true tab can be closed by user from tabbed pane.
      */
-    public ImageTab (boolean savable, boolean closeableByUser) {
+    public ImageTab(boolean savable, boolean closeableByUser) {
         this.savable = savable;
         this.closeableByUser = closeableByUser;
     }
 
-    /** @return tab title used by tabbed pane. */
-    public abstract String getTabTitle ();
+    /**
+     * @return tab title used by tabbed pane.
+     */
+    public abstract String getTabTitle();
 
-    /** @return tab style name used by image tabbed pane. */
+    /**
+     * @return tab style name used by image tabbed pane.
+     */
     public abstract String getTabIconStyle();
 
     /**
      * @return table that contains this tab view, will be passed to tabbed pane listener. Should
      * return same table every time this is called.
      */
-    public abstract Table getContentTable ();
+    public abstract Table getContentTable();
 
-    /** Called by pane when this tab becomes shown. Class overriding this should call super.onShow(). */
-    public void onShow () {
+    /**
+     * Called by pane when this tab becomes shown. Class overriding this should call super.onShow().
+     */
+    public void onShow() {
         activeTab = true;
     }
 
-    /** Called by pane when this tab becomes hidden. Class overriding this should call super.onHide(). */
-    public void onHide () {
+    /**
+     * Called by pane when this tab becomes hidden. Class overriding this should call super.onHide().
+     */
+    public void onHide() {
         activeTab = false;
     }
 
-    /** @return true is this tab is currently active. */
-    public boolean isActiveTab () {
+    /**
+     * @return true is this tab is currently active.
+     */
+    public boolean isActiveTab() {
         return activeTab;
     }
 
-    /** @return pane that this tab belongs to, or null. */
-    public ImageTabbedPane getPane () {
+    /**
+     * @return pane that this tab belongs to, or null.
+     */
+    public ImageTabbedPane getPane() {
         return pane;
     }
 
-    /** Should be called by TabbedPane only, when tab is added to pane. */
-    public void setPane (ImageTabbedPane pane) {
+    /**
+     * @param pane Should be called by TabbedPane only, when tab is added to pane.
+     */
+    public void setPane(ImageTabbedPane pane) {
         this.pane = pane;
     }
 
-    public boolean isSavable () {
+    public boolean isSavable() {
         return savable;
     }
 
-    public boolean isCloseableByUser () {
+    public boolean isCloseableByUser() {
         return closeableByUser;
     }
 
-    public boolean isDirty () {
+    public boolean isDirty() {
         return dirty;
     }
 
-    public void setDirty (boolean dirty) {
+    public void setDirty(boolean dirty) {
         checkSavable();
 
         boolean update = (dirty != this.dirty);
@@ -88,33 +104,41 @@ public abstract class ImageTab implements Disposable {
         }
     }
 
-    /** Marks this tab as dirty */
-    public void dirty () {
+    /**
+     * Marks this tab as dirty
+     */
+    public void dirty() {
         setDirty(true);
     }
 
     /**
      * Called when this tab should save its own state. After saving setDirty(false) must be called manually to remove dirty state.
+     *
      * @return true when save succeeded, false otherwise.
      */
-    public boolean save () {
+    public boolean save() {
         checkSavable();
 
         return false;
     }
 
-    private void checkSavable () {
-        if (isSavable() == false) throw new IllegalStateException("Tab " + getTabTitle() + " is not savable!");
+    private void checkSavable() {
+        if (isSavable() == false)
+            throw new IllegalStateException("Tab " + getTabTitle() + " is not savable!");
     }
 
-    /** Removes this tab from pane (if any). */
-    public void removeFromTabPane () {
+    /**
+     * Removes this tab from pane (if any).
+     */
+    public void removeFromTabPane() {
         if (pane != null) pane.remove(this);
     }
 
-    /** Called when tab is being removed from scene. */
+    /**
+     * Called when tab is being removed from scene.
+     */
     @Override
-    public void dispose () {
+    public void dispose() {
 
     }
 }

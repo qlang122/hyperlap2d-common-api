@@ -10,6 +10,7 @@ import com.badlogic.gdx.utils.Array;
 import com.kotcrab.vis.ui.util.InputValidator;
 import com.kotcrab.vis.ui.util.TableUtils;
 import com.kotcrab.vis.ui.widget.*;
+
 import games.rednblack.h2d.common.view.ui.listener.MultipleInputDialogListener;
 
 public class MultipleInputDialog extends VisWindow {
@@ -39,17 +40,17 @@ public class MultipleInputDialog extends VisWindow {
         VisTable fieldTable = new VisTable(true);
 
         if (validator == null) {
-            for (int i = 0; i < fieldTitles.length;  i++) {
+            for (int i = 0; i < fieldTitles.length; i++) {
                 fields.add(new VisTextField());
             }
         } else {
-            for (int i = 0; i < fieldTitles.length;  i++) {
+            for (int i = 0; i < fieldTitles.length; i++) {
                 fields.add(new VisValidatableTextField(validator));
             }
         }
 
         if (fieldTitles.length > 0) {
-            for (int i = 0; i < fieldTitles.length;  i++) {
+            for (int i = 0; i < fieldTitles.length; i++) {
                 fieldTable.add(new VisLabel(fieldTitles[i]));
                 fieldTable.add(fields.get(i)).expand().fill().row();
             }
@@ -95,6 +96,7 @@ public class MultipleInputDialog extends VisWindow {
     }
 
     /**
+     * @param texts      texts
      * @param selectText if true text will be selected (this can be useful if you want to allow user quickly erase all text).
      */
     public MultipleInputDialog setText(String[] texts, boolean selectText) {
