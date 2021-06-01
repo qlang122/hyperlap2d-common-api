@@ -33,9 +33,11 @@ import com.kotcrab.vis.ui.util.InputValidator;
 import com.kotcrab.vis.ui.widget.*;
 import com.kotcrab.vis.ui.widget.spinner.IntSpinnerModel;
 import com.kotcrab.vis.ui.widget.spinner.Spinner;
+
 import games.rednblack.h2d.common.view.ui.listener.CursorListener;
 import games.rednblack.h2d.common.view.ui.listener.ScrollFocusListener;
 import games.rednblack.h2d.common.view.ui.widget.TintButton;
+
 import org.puremvc.java.interfaces.IFacade;
 
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
@@ -46,6 +48,7 @@ import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
 public class StandardWidgetsFactory {
 
     private static IFacade facade;
+
     public static void init(IFacade f) {
         facade = f;
     }
@@ -79,21 +82,21 @@ public class StandardWidgetsFactory {
     public static VisTextField createTextField() {
         return createTextField("default");
     }
-    
+
     public static VisTextField createTextField(String style) {
-    	VisTextField visTextField = new VisTextField("", style) {
+        VisTextField visTextField = new VisTextField("", style) {
             @Override
             public void setText(String str) {
                 super.setText(str);
                 setCursorAtTextEnd();
             }
         };
-    	visTextField.addListener(new CursorListener(Cursors.TEXT, facade));
-    	return visTextField;
+        visTextField.addListener(new CursorListener(Cursors.TEXT, facade));
+        return visTextField;
     }
 
     public static VisTextField createTextField(String style, boolean textCursor) {
-    	VisTextField visTextField = new VisTextField() {
+        VisTextField visTextField = new VisTextField() {
             @Override
             public void setText(String str) {
                 super.setText(str);
@@ -102,11 +105,11 @@ public class StandardWidgetsFactory {
         };
         Skin skin = VisUI.getSkin();
         visTextField.setStyle(skin.get(style, VisTextField.VisTextFieldStyle.class));
-        if(textCursor)
-        	visTextField.addListener(new CursorListener(Cursors.TEXT, facade));
+        if (textCursor)
+            visTextField.addListener(new CursorListener(Cursors.TEXT, facade));
         return visTextField;
     }
-    
+
     public static VisTextField createTextField(String style, VisTextField.TextFieldFilter textFieldFilter) {
         VisTextField visTextField = createTextField(style);
         visTextField.setTextFieldFilter(textFieldFilter);
@@ -119,12 +122,12 @@ public class StandardWidgetsFactory {
         visTextField.setTextFieldFilter(textFieldFilter);
         return visTextField;
     }
-    
-    public static VisValidatableTextField createValidableTextField (InputValidator inputValidator) {
+
+    public static VisValidatableTextField createValidableTextField(InputValidator inputValidator) {
         return createValidableTextField("default", inputValidator);
     }
 
-    public static VisValidatableTextField createValidableTextField (String style, InputValidator inputValidator) {
+    public static VisValidatableTextField createValidableTextField(String style, InputValidator inputValidator) {
         VisValidatableTextField visTextField = new VisValidatableTextField(inputValidator) {
             @Override
             public void setText(String str) {
@@ -138,7 +141,7 @@ public class StandardWidgetsFactory {
         return visTextField;
     }
 
-    public static VisValidatableTextField createValidableTextField (String text, String style, InputValidator inputValidator, VisTextField.TextFieldFilter textFieldFilter) {
+    public static VisValidatableTextField createValidableTextField(String text, String style, InputValidator inputValidator, VisTextField.TextFieldFilter textFieldFilter) {
         VisValidatableTextField visTextField = createValidableTextField(style, inputValidator);
         visTextField.setTextFieldFilter(textFieldFilter);
         visTextField.addListener(new CursorListener(Cursors.TEXT, facade));
@@ -182,6 +185,12 @@ public class StandardWidgetsFactory {
         return visCheckBox;
     }
 
+    public static VisCheckBox createCheckBox(String text, String styleName) {
+        VisCheckBox visCheckBox = new VisCheckBox(text, styleName);
+        visCheckBox.addListener(new CursorListener(Cursors.FINGER, facade));
+        return visCheckBox;
+    }
+
     public static <T> VisSelectBox<T> createSelectBox(Class<T> type) {
         return createSelectBox("default", type);
     }
@@ -206,7 +215,7 @@ public class StandardWidgetsFactory {
         visSelectBox.clearListeners();
         visSelectBox.addListener(new CursorListener(Cursors.FINGER, facade));
         visSelectBox.addListener(new ClickListener() {
-            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 if (pointer == 0 && button != 0) return false;
                 if (visSelectBox.isDisabled()) return false;
                 if (visSelectBox.getScrollPane().hasParent()) {
@@ -224,7 +233,7 @@ public class StandardWidgetsFactory {
     }
 
     public static TintButton createTintButton() {
-        return createTintButton(29,21);
+        return createTintButton(29, 21);
     }
 
     public static TintButton createTintButton(int width, int height) {
@@ -254,12 +263,12 @@ public class StandardWidgetsFactory {
     }
 
     public static VisTextButton createTextButton(String text) {
-    	return createTextButton(text, "default");
-	}
+        return createTextButton(text, "default");
+    }
 
-	public static VisTextButton createTextButton(String text, String style) {
+    public static VisTextButton createTextButton(String text, String style) {
         return new VisTextButton(text, style);
-	}
+    }
 
     public static VisImageButton createImageButton(String style) {
         VisImageButton button = new VisImageButton(style);
