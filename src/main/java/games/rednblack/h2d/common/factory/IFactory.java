@@ -7,6 +7,7 @@ public interface IFactory {
     Entity getCreatedEntity();
 
     boolean createSimpleImage(String regionName, Vector2 position);
+    boolean createAtlasImage(String regionName, Vector2 position);
     boolean createSpriteAnimation(String animationName, Vector2 position);
     boolean createSpineAnimation(String animationName, Vector2 position);
     boolean createSpriterAnimation(String animationName, Vector2 position);
