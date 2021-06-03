@@ -68,16 +68,16 @@ public class MsgAPI {
     public static final String LIBRARY_LIST_UPDATED = GLOBAL_PREFIX + ".LIBRARY_LIST_UPDATED";
     public static final String LIBRARY_ACTIONS_UPDATED = GLOBAL_PREFIX + ".LIBRARY_ACTIONS_UPDATED";
 
-    private static final String TOOL_BOX_MEDIATOR_PREFIX =  "games.rednblack.editor.view.ui.box.UIToolBoxMediator";
+    private static final String TOOL_BOX_MEDIATOR_PREFIX = "games.rednblack.editor.view.ui.box.UIToolBoxMediator";
     public static final String TOOL_SELECTED = TOOL_BOX_MEDIATOR_PREFIX + ".TOOL_CHANGED";
     public static final String NEW_TOOL_ADDED = TOOL_BOX_MEDIATOR_PREFIX + ".NEW_TOOL_ADDED";
 
-    private static final String IMAGES_TAB_MEDIATOR_PREFIX= "games.rednblack.editor.view.ui.box.resourcespanel.UIImagesTabMediator";
+    private static final String IMAGES_TAB_MEDIATOR_PREFIX = "games.rednblack.editor.view.ui.box.resourcespanel.UIImagesTabMediator";
     public static final String ADD_TARGET = IMAGES_TAB_MEDIATOR_PREFIX + ".ADD_TARGET";
     public static final String REMOVE_TARGET = IMAGES_TAB_MEDIATOR_PREFIX + ".REMOVE_TARGET";
 
     /**
-     *  Previous Sandbox class notifications
+     * Previous Sandbox class notifications
      */
     public static final String SANDBOX_PREFIX = "games.rednblack.editor.commands.Sandbox";
 
@@ -152,6 +152,7 @@ public class MsgAPI {
 
     // drop down resources
     public static final String ACTION_DELETE_IMAGE_RESOURCE = SANDBOX_PREFIX + ".ACTION_DELETE_IMAGE_RESOURCE";
+    public static final String ACTION_DELETE_ATLAS_IMAGE_RESOURCE = SANDBOX_PREFIX + ".ACTION_DELETE_ATLAS_IMAGE_RESOURCE";
     public static final String ACTION_DELETE_SPRITE_ANIMATION_RESOURCE = SANDBOX_PREFIX + ".ACTION_DELETE_SPRITE_ANIMATION_RESOURCE";
     public static final String ACTION_DELETE_SPINE_ANIMATION_RESOURCE = SANDBOX_PREFIX + ".ACTION_DELETE_SPINE_ANIMATION_RESOURCE";
     public static final String ACTION_DELETE_SPRITER_ANIMATION_RESOURCE = SANDBOX_PREFIX + "ACTION_DELETE_SPRITER_ANIMATION_RESOURCE";
@@ -162,14 +163,14 @@ public class MsgAPI {
     public static final String ACTION_EXPORT_ACTION_ITEM = SANDBOX_PREFIX + ".ACTION_EXPORT_ACTION_ITEM";
     public static final String ACTION_DELETE_PARTICLE_EFFECT = SANDBOX_PREFIX + ".ACTION_DELETE_PARTICLE_EFFECT";
     public static final String ACTION_DELETE_TALOS_VFX = SANDBOX_PREFIX + ".ACTION_DELETE_TALOS_VFX";
-    
+
     public static final String ACTION_UPDATE_RULER_POSITION = SANDBOX_PREFIX + ".ACTION_UPDATE_RULER_POSITION";
     public static final String ACTION_CHANGE_POLYGON_VERTEX_POSITION = SANDBOX_PREFIX + ".ACTION_UPDATE_POLYGON_VERTEX_POSITION";
     public static final String ACTION_DELETE_POLYGON_VERTEX = SANDBOX_PREFIX + ".ACTION_DELETE_POLYGON_VERTEX";
     public static final String ACTION_CHANGE_ORIGIN_POSITION = SANDBOX_PREFIX + ".ACTION_CHANGE_ORIGIN_POSITION";
 
     /**
-     *  Other
+     * Other
      */
     public static final String OPEN_CODE_EDITOR = GLOBAL_PREFIX + ".OPEN_CODE_EDITOR";
     public static final String OPEN_NODE_EDITOR = GLOBAL_PREFIX + ".OPEN_NODE_EDITOR";
