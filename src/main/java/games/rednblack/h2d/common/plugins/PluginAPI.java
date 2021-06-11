@@ -97,6 +97,8 @@ public interface PluginAPI {
     TextureAtlas getProjectTextureAtlas();
 
 
+    TextureAtlas getAtlasImageAtlas(String atlasName);
+
     /**
      * Adds new sub menu item to the top bar
      *
