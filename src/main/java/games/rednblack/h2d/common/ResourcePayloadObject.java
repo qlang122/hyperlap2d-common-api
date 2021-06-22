@@ -20,6 +20,7 @@ package games.rednblack.h2d.common;
 
 public class ResourcePayloadObject<T> {
     public String name;
+    public String tip;
     public float xOffset;
     public float yOffset;
     public String className;
