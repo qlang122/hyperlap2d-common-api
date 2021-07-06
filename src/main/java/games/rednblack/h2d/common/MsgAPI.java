@@ -75,6 +75,11 @@ public class MsgAPI {
     private static final String IMAGES_TAB_MEDIATOR_PREFIX = "games.rednblack.editor.view.ui.box.resourcespanel.UIImagesTabMediator";
     public static final String ADD_TARGET = IMAGES_TAB_MEDIATOR_PREFIX + ".ADD_TARGET";
     public static final String REMOVE_TARGET = IMAGES_TAB_MEDIATOR_PREFIX + ".REMOVE_TARGET";
+    
+    // drop events
+    private static final String RESOURCES_BOX_MEDIATOR_PREFIX = "games.rednblack.editor.view.ui.box.UIResourcesBoxMediator";
+    public static final String IMAGE_BUNDLE_DROP_SINGLE       = RESOURCES_BOX_MEDIATOR_PREFIX + ".IMAGE_BUNDLE_DROP_SINGLE";
+    public static final String IMAGE_BUNDLE_DROP			  = RESOURCES_BOX_MEDIATOR_PREFIX + ".IMAGE_BUNDLE_DROP";
 
     /**
      * Previous Sandbox class notifications
@@ -132,6 +137,7 @@ public class MsgAPI {
     public static final String ACTION_UPDATE_TALOS_DATA = SANDBOX_PREFIX + ".ACTION_UPDATE_TALOS_DATA";
     public static final String ACTION_UPDATE_BODY_LIGHT_DATA = SANDBOX_PREFIX + ".ACTION_UPDATE_BODY_LIGHT_DATA";
     public static final String ACTION_UPDATE_PHYSICS_BODY_DATA = SANDBOX_PREFIX + ".ACTION_UPDATE_PHYSICS_BODY_DATA";
+    public static final String ACTION_UPDATE_SENSOR_DATA = SANDBOX_PREFIX + ".ACTION_UPDATE_SENSOR_DATA";
     public static final String ACTION_UPDATE_SHADER_DATA = SANDBOX_PREFIX + ".ACTION_UPDATE_SHADER_DATA";
     public static final String ACTION_UPDATE_SPRITE_ANIMATION_DATA = SANDBOX_PREFIX + ".ACTION_UPDATE_SPRITE_ANIMATION_DATA";
     public static final String ACTION_UPDATE_SPINE_ANIMATION_DATA = SANDBOX_PREFIX + ".ACTION_UPDATE_SPINE_ANIMATION_DATA";
