@@ -22,7 +22,6 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
 import games.rednblack.editor.renderer.data.ProjectInfoVO;
@@ -94,7 +93,7 @@ public interface PluginAPI {
     /**
      * @return TextureAtlas of loaded project
      */
-    TextureAtlas.AtlasRegion getProjectTextureRegion(String regionName);
+    TextureAtlas.AtlasRegion getProjectTextureRegion(String regionName, int regionIndex);
 
 
     TextureAtlas getAtlasImageAtlas(String atlasName);
