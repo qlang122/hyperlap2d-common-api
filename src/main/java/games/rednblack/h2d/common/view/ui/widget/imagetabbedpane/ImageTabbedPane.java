@@ -662,7 +662,7 @@ public class ImageTabbedPane {
 
                 if (buttonsSize <= maxLineElements) {
                     float cellWidth = (availableSpace - style.tabPadding * buttonsSize) / buttonsSize;
-                    cellButton.width(cellWidth + style.tabPadding);
+                    cellButton.width(cellWidth /*+ style.tabPadding*/);
                 } else {
                     int linesNeeded = (int) Math.ceil((double) (buttonsSize) / maxLineElements) - 1;
                     int line = index / maxLineElements;
