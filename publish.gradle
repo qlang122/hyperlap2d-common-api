@@ -1,4 +1,4 @@
-apply plugin: 'maven'
+apply plugin: 'maven-publish'
 apply plugin: 'signing'
 
 group = 'games.rednblack.hyperlap2d'
@@ -40,13 +40,13 @@ repositories {
 }
 
 task artifactDocs(type: Jar, dependsOn: javadoc) {
-    classifier = 'javadoc'
+    archiveClassifier.set('javadoc')
     from 'build/docs/javadoc'
 }
 
 task artifactSources(type: Jar) {
     from sourceSets.main.allSource
-    classifier = 'sources'
+    archiveClassifier.set('sources')
 }
 
 artifacts {
@@ -66,51 +66,24 @@ if(isReleaseBuild) {
     }
 }
 
-uploadArchives {
-    repositories {
-        if (isDevBuild) {
-            mavenLocal()
+publishing {
+    publications {
+        mavenRelease(MavenPublication) {
+            from components.java
+            // 配置你的 groupId, artifactId 和版本
+            groupId group
+            artifactId project.ext.artifact
+            version "$version"
         }
-        else {
-            mavenDeployer {
-                if(isReleaseBuild) {
-                    beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
-                }
-
-                repository(url: sonatypeRepositoryUrl) {
-                    authentication(userName: getRepositoryUsername(), password: getRepositoryPassword())
-                }
-
-                pom.version = version
-                pom.packaging = packaging
-
-                pom.project {
-                    artifactId = artifact
-                    name 'HyperLap2D PlugIns Common API'
-                    description 'Common API to build HyperLap2D plugins'
-                    url 'https://github.com/rednblackgames/hyperlap2d-common-api'
-
-                    scm {
-                        url 'scm:git@github.com:rednblackgames/hyperlap2d-common-api.git'
-                        connection 'scm:git@github.com:rednblackgames/hyperlap2d-common-api.git'
-                        developerConnection 'scm:git@github.com:rednblackgames/hyperlap2d-common-api.git'
-                    }
-
-                    licenses {
-                        license {
-                            name 'The Apache Software License, Version 2.0'
-                            url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-                            distribution 'repo'
-                        }
-                    }
-
-                    developers {
-                        developer {
-                            id 'fgnm'
-                            name 'Francesco Marongiu'
-                        }
-                    }
-                }
+    }
+    repositories {
+        maven {
+            // 目标 Maven 仓库的 URL
+            url sonatypeRepositoryUrl
+            // 相关认证信息
+            credentials {
+                username getRepositoryUsername()
+                password getRepositoryPassword()
             }
         }
     }
