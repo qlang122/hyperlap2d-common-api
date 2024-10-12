@@ -37,7 +37,7 @@ public class ProjectVO {
     public String lastOpenResolution = "";
     public boolean lockLines = false;
     public float gridSize = 1;
-    public Color backgroundColor = new Color(0,0,0,1);
+    public Color backgroundColor = new Color(0, 0, 0, 1);
     public boolean box2dDebugRender = false;
 
     public TexturePackerVO texturePackerVO = new TexturePackerVO();
@@ -48,7 +48,7 @@ public class ProjectVO {
         String str = "";
         Json json = new Json();
         json.setOutputType(OutputType.json);
-        str = json.toJson(this);
+        str = json.prettyPrint(this).replace("\t", "  ");
         return str;
     }
 }
